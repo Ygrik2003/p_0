@@ -1,0 +1,62 @@
+{
+    "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 4,
+        "minor": 0,
+        "patch": 2
+    },
+    "configurePresets": [
+        {
+            "name": "prebuild-sysroot",
+            "binaryDir": "${sourceDir}/.build/${presetName}",
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "P0_PREBUILD_SYSROOT": {
+                    "type": "BOOL",
+                    "value": "ON"
+                }
+            }
+        },
+        {
+            "name": "common",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/.build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_UNITY_BUILD": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "CMAKE_UNITY_BUILD_BATCH_SIZE": {
+                    "type": "STRING",
+                    "value": "32"
+                }
+            }
+        },
+        {
+            "name": "linux-ninja",
+            "inherits": [
+                "common"
+            ],
+            "generator": "Ninja Multi-Config"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "linux-ninja",
+            "configurePreset": "linux-ninja"
+        },
+        {
+            "name": "prebuild-sysroot-debug",
+            "configurePreset": "prebuild-sysroot",
+            "configuration": "Debug"
+        },
+        {
+            "name": "prebuild-sysroot-relwithdebinfo",
+            "configurePreset": "prebuild-sysroot",
+            "configuration": "RelWithDebInfo"
+        }
+    ],
+    "testPresets": [],
+    "workflowPresets": []
+}
