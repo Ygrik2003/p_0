@@ -1,0 +1,20 @@
+name: build
+
+on:
+  push: ["main"]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Python dependencies
+      run: pip install --user pytest pytest-cov
+    - name: Coverage test
+      run: |
+           pytest --cov --cov-branch --cov-report=xml
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+  
