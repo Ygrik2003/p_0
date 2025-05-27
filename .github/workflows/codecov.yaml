@@ -8,13 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Apt dependencies
+      run: sudo apt install clang
     - name: Python dependencies
-      run: pip install --user pytest pytest-cov
-    - name: Coverage test
+      run: pip install --user cmake
+    - name: build
       run: |
-           pytest --cov --cov-branch --cov-report=xml
+           cmake --workflow --preset linux-ninja-clang-coverage-${{matrix.target}}
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-  
+        run: |
+              bash <(curl -s https://codecov.io/bash)

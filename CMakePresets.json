@@ -40,13 +40,26 @@
             ],
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": {
-                    "type": "STRING",
-                    "value": "clang"
-                },
                 "CMAKE_CXX_COMPILER": {
                     "type": "STRING",
                     "value": "clang++"
+                }
+            }
+        },
+        {
+            "name": "linux-ninja-clang-coverage",
+            "inherits": [
+                "common"
+            ],
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": {
+                    "type": "STRING",
+                    "value": "clang++"
+                },
+                "P0_TEST_CODE_COVERAGE": {
+                    "type": "BOOL",
+                    "value": "ON"
                 }
             }
         }
@@ -63,6 +76,16 @@
             "configuration": "RelWithDebInfo"
         },
         {
+            "name": "linux-ninja-clang-coverage-debug",
+            "configurePreset": "linux-ninja-clang-coverage",
+            "configuration": "Debug"
+        },
+        {
+            "name": "linux-ninja-clang-coverage-relwithdebinfo",
+            "configurePreset": "linux-ninja-clang-coverage",
+            "configuration": "RelWithDebInfo"
+        },
+        {
             "name": "prebuild-sysroot-debug",
             "configurePreset": "prebuild-sysroot",
             "configuration": "Debug"
@@ -73,7 +96,18 @@
             "configuration": "RelWithDebInfo"
         }
     ],
-    "testPresets": [],
+    "testPresets": [
+        {
+            "name": "linux-ninja-clang-coverage-debug",
+            "configurePreset": "linux-ninja-clang-coverage",
+            "configuration": "Debug"
+        },
+        {
+            "name": "linux-ninja-clang-coverage-relwithdebinfo",
+            "configurePreset": "linux-ninja-clang-coverage",
+            "configuration": "RelWithDebInfo"
+        }
+    ],
     "workflowPresets": [
         {
             "name": "linux-ninja-clang-debug",
@@ -98,6 +132,40 @@
                 {
                     "type": "build",
                     "name": "linux-ninja-clang-relwithdebinfo"
+                }
+            ]
+        },
+        {
+            "name": "linux-ninja-clang-coverage-debug",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "linux-ninja-clang-coverage"
+                },
+                {
+                    "type": "build",
+                    "name": "linux-ninja-clang-coverage-debug"
+                },
+                {
+                    "type": "test",
+                    "name": "linux-ninja-clang-coverage-debug"
+                }
+            ]
+        },
+        {
+            "name": "linux-ninja-clang-coverage-relwithdebinfo",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "linux-ninja-clang-coverage"
+                },
+                {
+                    "type": "build",
+                    "name": "linux-ninja-clang-coverage-relwithdebinfo"
+                },
+                {
+                    "type": "test",
+                    "name": "linux-ninja-clang-coverage-relwithdebinfo"
                 }
             ]
         }
