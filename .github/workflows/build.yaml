@@ -1,0 +1,21 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [debug, relwithdebinfo]
+    steps:
+    - uses: actions/checkout@v2
+    - name: dependencies
+      run: sudo apt install clang
+    - name: build
+      run: |
+           cmake --workflow --preset linux-ninja-clang-${{matrix.target}}
+  

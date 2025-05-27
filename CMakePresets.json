@@ -34,17 +34,33 @@
             }
         },
         {
-            "name": "linux-ninja",
+            "name": "linux-ninja-clang",
             "inherits": [
                 "common"
             ],
-            "generator": "Ninja Multi-Config"
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": {
+                    "type": "STRING",
+                    "value": "clang"
+                },
+                "CMAKE_CXX_COMPILER": {
+                    "type": "STRING",
+                    "value": "clang++"
+                }
+            }
         }
     ],
     "buildPresets": [
         {
-            "name": "linux-ninja",
-            "configurePreset": "linux-ninja"
+            "name": "linux-ninja-clang-debug",
+            "configurePreset": "linux-ninja-clang",
+            "configuration": "Debug"
+        },
+        {
+            "name": "linux-ninja-clang-relwithdebinfo",
+            "configurePreset": "linux-ninja-clang",
+            "configuration": "RelWithDebInfo"
         },
         {
             "name": "prebuild-sysroot-debug",
@@ -58,5 +74,32 @@
         }
     ],
     "testPresets": [],
-    "workflowPresets": []
+    "workflowPresets": [
+        {
+            "name": "linux-ninja-clang-debug",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "linux-ninja-clang"
+                },
+                {
+                    "type": "build",
+                    "name": "linux-ninja-clang-debug"
+                }
+            ]
+        },
+        {
+            "name": "linux-ninja-clang-relwithdebinfo",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "linux-ninja-clang"
+                },
+                {
+                    "type": "build",
+                    "name": "linux-ninja-clang-relwithdebinfo"
+                }
+            ]
+        }
+    ]
 }
