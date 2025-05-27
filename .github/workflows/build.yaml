@@ -6,15 +6,17 @@ on:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         target: [debug, relwithdebinfo]
     steps:
     - uses: actions/checkout@v2
-    - name: dependencies
-      run: sudo apt install clang
+    - name: Apt dependencies
+      run: sudo apt install clang python
+    - name: Python dependencies
+      run: pip install --user cmake
     - name: build
       run: |
            cmake --workflow --preset linux-ninja-clang-${{matrix.target}}
