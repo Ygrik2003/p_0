@@ -15,7 +15,7 @@ jobs:
     - name: Apt dependencies
       run: sudo apt install clang
     - name: Python dependencies
-      run: pip install --user cmake
+      run: pip install --user cmake coverage
     - name: build
       run: |
            cmake --workflow --preset linux-ninja-clang-coverage-${{matrix.target}}
@@ -23,5 +23,3 @@ jobs:
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        run: |
-              bash <(curl -s https://codecov.io/bash)
