@@ -6,15 +6,14 @@ cmake_path(
     PARENT_PATH
     parent_dir)
 
-set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/sysroot)
-set(CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/sysroot)
-set(sources_dir ${parent_dir}/external)
+set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/sysroot/${CMAKE_SYSTEM_NAME})
+set(external_sources_dir ${parent_dir}/external)
 
 include(ExternalProject)
 
 externalproject_add(
     sdl
-    SOURCE_DIR ${sources_dir}/sdl
+    SOURCE_DIR ${external_sources_dir}/sdl
     GIT_REPOSITORY https://github.com/libsdl-org/SDL
     GIT_TAG release-3.2.14
     CMAKE_GENERATOR "Ninja Multi-Config"
@@ -22,5 +21,26 @@ externalproject_add(
     CMAKE_ARGS --fresh
                -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_DEBUG_POSTFIX:STRING=d
-               -DSDL_STATIC:BOOL=ON
-               -DSDL_SHARED:BOOL=OFF)
+               -DSDL_STATIC:BOOL=OFF
+               -DSDL_SHARED:BOOL=ON
+               -DSDL_TESTS:BOOL=OFF)
+
+externalproject_add(
+    spdlog
+    SOURCE_DIR ${external_sources_dir}/spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog
+    GIT_TAG v1.15.3
+    CMAKE_GENERATOR "Ninja Multi-Config"
+    BUILD_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config $<CONFIG>
+    CMAKE_ARGS --fresh -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+               -DCMAKE_DEBUG_POSTFIX:STRING=d)
+
+externalproject_add(
+    libassert
+    SOURCE_DIR ${external_sources_dir}/libassert
+    GIT_REPOSITORY https://github.com/jeremy-rifkin/libassert
+    GIT_TAG v2.1.5
+    CMAKE_GENERATOR "Ninja Multi-Config"
+    BUILD_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config $<CONFIG>
+    CMAKE_ARGS --fresh -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+               -DCMAKE_DEBUG_POSTFIX:STRING=d)

@@ -1,0 +1,12 @@
+
+prefix=/home/ygrik/Documents/study/p_0/sysroot/Linux
+exec_prefix="${prefix}"
+libdir="${prefix}/lib"
+includedir="${prefix}/include"
+
+Name: libdwarf
+Description: DWARF debug symbols library
+Version: 0.11.1
+Libs: -L${libdir} -ldwarf
+Cflags: -I${includedir}
+
