@@ -19,6 +19,7 @@ jobs:
     - name: build
       run: |
            cmake --workflow --preset linux-ninja-clang-coverage-${{matrix.target}}
+           ctest -T Coverage
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
       with:
