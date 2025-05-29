@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Apt dependencies
-      run: sudo apt install clang
+      run: sudo apt install clang llvm
     - name: Python dependencies
       run: pip install --user cmake coverage
     - name: build
