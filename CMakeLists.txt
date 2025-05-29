@@ -24,7 +24,7 @@ add_library(p0_common INTERFACE)
 if(P0_TEST_CODE_COVERAGE)
     target_compile_options(
         p0_common
-        INTERFACE $<CXX_COMPILER_ID:Clang>:
+        INTERFACE $<$<CXX_COMPILER_ID:Clang>:
                   -fprofile-instr-generate
                   -fcoverage-mapping
                   -fcoverage-mcdc
