@@ -24,4 +24,4 @@ jobs:
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        gcov_executable: llvm-cov gcov
+        gcov_executable: "llvm-cov gcov"
