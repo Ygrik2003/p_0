@@ -47,7 +47,7 @@
             }
         },
         {
-            "name": "linux-ninja-clang-coverage",
+            "name": "linux-ninja-gnu-coverage",
             "inherits": [
                 "common"
             ],
@@ -55,15 +55,7 @@
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": {
                     "type": "STRING",
-                    "value": "clang++"
-                },
-                "COVERAGE_COMMAND": {
-                    "type": "STRING",
-                    "value": "llvm-cov"
-                },
-                "COVERAGE_EXTRA_FLAGS": {
-                    "type": "STRING",
-                    "value": "gcov"
+                    "value": "g++"
                 },
                 "P0_TEST_CODE_COVERAGE": {
                     "type": "BOOL",
@@ -84,13 +76,13 @@
             "configuration": "RelWithDebInfo"
         },
         {
-            "name": "linux-ninja-clang-coverage-debug",
-            "configurePreset": "linux-ninja-clang-coverage",
+            "name": "linux-ninja-gnu-coverage-debug",
+            "configurePreset": "linux-ninja-gnu-coverage",
             "configuration": "Debug"
         },
         {
-            "name": "linux-ninja-clang-coverage-relwithdebinfo",
-            "configurePreset": "linux-ninja-clang-coverage",
+            "name": "linux-ninja-gnu-coverage-relwithdebinfo",
+            "configurePreset": "linux-ninja-gnu-coverage",
             "configuration": "RelWithDebInfo"
         },
         {
@@ -106,13 +98,13 @@
     ],
     "testPresets": [
         {
-            "name": "linux-ninja-clang-coverage-debug",
-            "configurePreset": "linux-ninja-clang-coverage",
+            "name": "linux-ninja-gnu-coverage-debug",
+            "configurePreset": "linux-ninja-gnu-coverage",
             "configuration": "Debug"
         },
         {
-            "name": "linux-ninja-clang-coverage-relwithdebinfo",
-            "configurePreset": "linux-ninja-clang-coverage",
+            "name": "linux-ninja-gnu-coverage-relwithdebinfo",
+            "configurePreset": "linux-ninja-gnu-coverage",
             "configuration": "RelWithDebInfo"
         }
     ],
@@ -144,36 +136,36 @@
             ]
         },
         {
-            "name": "linux-ninja-clang-coverage-debug",
+            "name": "linux-ninja-gnu-coverage-debug",
             "steps": [
                 {
                     "type": "configure",
-                    "name": "linux-ninja-clang-coverage"
+                    "name": "linux-ninja-gnu-coverage"
                 },
                 {
                     "type": "build",
-                    "name": "linux-ninja-clang-coverage-debug"
+                    "name": "linux-ninja-gnu-coverage-debug"
                 },
                 {
                     "type": "test",
-                    "name": "linux-ninja-clang-coverage-debug"
+                    "name": "linux-ninja-gnu-coverage-debug"
                 }
             ]
         },
         {
-            "name": "linux-ninja-clang-coverage-relwithdebinfo",
+            "name": "linux-ninja-gnu-coverage-relwithdebinfo",
             "steps": [
                 {
                     "type": "configure",
-                    "name": "linux-ninja-clang-coverage"
+                    "name": "linux-ninja-gnu-coverage"
                 },
                 {
                     "type": "build",
-                    "name": "linux-ninja-clang-coverage-relwithdebinfo"
+                    "name": "linux-ninja-gnu-coverage-relwithdebinfo"
                 },
                 {
                     "type": "test",
-                    "name": "linux-ninja-clang-coverage-relwithdebinfo"
+                    "name": "linux-ninja-gnu-coverage-relwithdebinfo"
                 }
             ]
         }

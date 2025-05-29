@@ -18,10 +18,8 @@ jobs:
       run: pip install --user cmake coverage
     - name: build
       run: |
-           cmake --workflow --preset linux-ninja-clang-coverage-${{matrix.target}}
-           ctest -T Coverage
+           cmake --workflow --preset linux-ninja-gnu-coverage-${{matrix.target}}
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        gcov_executable: "grcov"
