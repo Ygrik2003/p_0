@@ -57,6 +57,14 @@
                     "type": "STRING",
                     "value": "clang++"
                 },
+                "COVERAGE_COMMAND": {
+                    "type": "STRING",
+                    "value": "llvm-cov"
+                },
+                "COVERAGE_EXTRA_FLAGS": {
+                    "type": "STRING",
+                    "value": "gcov"
+                },
                 "P0_TEST_CODE_COVERAGE": {
                     "type": "BOOL",
                     "value": "ON"
