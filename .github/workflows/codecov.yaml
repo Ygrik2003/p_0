@@ -12,8 +12,6 @@ jobs:
         target: [debug, relwithdebinfo]
     steps:
     - uses: actions/checkout@v2
-    - name: Apt dependencies
-      run: sudo apt install clang grcov
     - name: Python dependencies
       run: pip install --user cmake coverage
     - name: build
