@@ -40,6 +40,15 @@ externalproject_add(
     SOURCE_DIR ${external_sources_dir}/libassert
     GIT_REPOSITORY https://github.com/jeremy-rifkin/libassert
     GIT_TAG v2.1.5
+    BUILD_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR>
+    CMAKE_ARGS --fresh -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
+               -DCMAKE_BUILD_TYPE:STRING=Release)
+
+externalproject_add(
+    doctest
+    SOURCE_DIR ${external_sources_dir}/doctest
+    GIT_REPOSITORY https://github.com/doctest/doctest
+    GIT_TAG v2.4.12
     CMAKE_GENERATOR "Ninja Multi-Config"
     BUILD_COMMAND ${CMAKE_COMMAND} --build <BINARY_DIR> --config $<CONFIG>
     CMAKE_ARGS --fresh -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}

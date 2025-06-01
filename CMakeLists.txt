@@ -3,12 +3,14 @@ cmake_minimum_required(VERSION 4.0.2 FATAL_ERROR)
 project(p_0 VERSION 0.0.0 LANGUAGES CXX)
 
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/sysroot/${CMAKE_SYSTEM_NAME})
+
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 find_package(options CONFIG REQUIRED)
 
 if(P0_PREBUILD_SYSROOT)
-    include(prebuild_dependency.cmake)
+    include(prebuild_dependency)
     return()
 endif()
 
@@ -39,6 +41,26 @@ find_package(
     3.2.14
     EXACT
     CONFIG
+    REQUIRED)
+
+find_package(
+    spdlog
+    1.15.3
+    EXACT
+    CONFIG
+    REQUIRED)
+
+find_package(
+    libassert
+    2.1.5
+    EXACT
+    CONFIG
+    REQUIRED)
+
+find_package(
+    doctest
+    2.4.12
+    EXACT
     REQUIRED)
 
 add_subdirectory(src)

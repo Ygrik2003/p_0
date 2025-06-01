@@ -1,6 +1,8 @@
 #include "overlay.h"
 
 #include <SDL3/SDL.h>
+#include <libassert/assert.hpp>
+#include <spdlog/spdlog.h>
 
 overlay::overlay() noexcept
 {
@@ -8,7 +10,7 @@ overlay::overlay() noexcept
                             SDL_INIT_EVENTS);
     if (!success)
     {
-        // logger SDL_GetError()
+        spdlog::error("Error in SDL_Init call: %s", SDL_GetError());
     }
 }
 
