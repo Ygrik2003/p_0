@@ -17,7 +17,10 @@ jobs:
       run: sudo apt install clang
     - name: Python dependencies
       run: pip install --user cmake
+    - name: configure
+      run: |
+           cmake --preset linux-ninja-clang
     - name: build
       run: |
-           cmake --workflow --preset linux-ninja-clang-${{matrix.target}}
+           cmake --build --preset linux-ninja-clang-${{matrix.target}}
   
